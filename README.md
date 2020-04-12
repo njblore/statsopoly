@@ -1,16 +1,10 @@
-# scoreboards_app
+## Statsopoly!
 
-A new Flutter project.
+This is a follow on to project_yule, but make it mobile. It's a very simple app that displays my scores from board games played with my partner and friends in fun charts and graphs, so we can strategise future games and brag on each other.
 
-## Getting Started
+I was motivated to have a go at using Flutter again, since it's almost one year since I first (and last) attempted to use it in my final project at Northcoders, and I wanted to see if my experience would be any different now that I have alllmost a year (10 months ok) of professional software development under my belt.
 
-This project is a starting point for a Flutter application.
+Also I wanted to add some features onto the project*yule app but the code is horrendous so starting over felt \_correct*.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Running the app is very straightforward, once flutter is installed all you need to do is
+`flutter run`
