@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/screens/agricola-home.dart';
+import 'package:scoreboards_app/screens/terraforming-home.dart';
 import 'package:scoreboards_app/theme/style.dart';
 
 void main() => runApp(MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MyHomePage(),
         '/agricola': (context) => Agricola(),
+        '/mars': (context) => Mars(),
       },
       theme: AppThemeData,
     );
@@ -68,7 +70,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Statsopoly!",
+                    "Statsopoly",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white,
@@ -89,15 +91,15 @@ class MyHomePage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/agricola');
+                          Navigator.pushNamed(context, '/mars');
                         },
                         child: Material(
                           elevation: 5.0,
                           shape: CircleBorder(),
                           clipBehavior: Clip.antiAlias,
                           child: Container(
-                            width: 150.0,
-                            height: 150.0,
+                            width: 120.0,
+                            height: 120.0,
                             decoration: new BoxDecoration(
                               color: const Color(0xff7c94b6),
                               image: new DecorationImage(
@@ -130,8 +132,8 @@ class MyHomePage extends StatelessWidget {
                             shape: CircleBorder(),
                             clipBehavior: Clip.antiAlias,
                             child: Container(
-                              width: 150.0,
-                              height: 150.0,
+                              width: 120.0,
+                              height: 120.0,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage('data/agricola.jpg'),
