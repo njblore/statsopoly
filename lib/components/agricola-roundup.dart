@@ -12,10 +12,28 @@ class AgricolaRoundup extends StatelessWidget {
     var nonTwoPlayerGames = numOfGames - numOfTwoPlayerGames;
     this
         .agricolaData
-        .allWinners
+        .allScoresRoundups
         .sort((a, b) => a.winningScore.compareTo(b.winningScore));
-    var highestScore = this.agricolaData.allWinners.last.winningScore;
-    var highestScoringPlayer = this.agricolaData.allWinners.last.winner;
+    var highestScore = this.agricolaData.allScoresRoundups.last.winningScore;
+    var highestScoringPlayer = this.agricolaData.allScoresRoundups.last.winner;
+
+    this
+        .agricolaData
+        .allScoresRoundups
+        .sort((a, b) => a.loserScore.compareTo(b.loserScore));
+    var lowestScoringPlayer =
+        this.agricolaData.allScoresRoundups.first.loserName;
+    var lowestScore = this.agricolaData.allScoresRoundups.first.loserScore;
+    var overallAverage = (this
+                .agricolaData
+                .allScoresRoundups
+                .map((scores) => scores.averageScore)
+                .fold(0, (total, score) {
+              total += score;
+              return total;
+            }) /
+            this.agricolaData.allScoresRoundups.length)
+        .toStringAsFixed(1);
 
     return Scaffold(
       body: Center(
@@ -26,7 +44,11 @@ class AgricolaRoundup extends StatelessWidget {
             Text(
                 'Of those, $numOfTwoPlayerGames were two player games, and $nonTwoPlayerGames were multiplayer games'),
             Text(
-                'The highest score across all games was $highestScore, scored by $highestScoringPlayer'),
+                'The highest score across all games was $highestScore, scored by $highestScoringPlayer!'),
+            Text(
+                'And the lowest score across all games was $lowestScore, scored by $lowestScoringPlayer :('),
+            Text(
+                'The average score across all games is a respectable $overallAverage')
           ],
         ),
       ),

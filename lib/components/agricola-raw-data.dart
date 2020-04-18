@@ -10,7 +10,6 @@ Future loadGame() async {
   String jsonString = await _loadAGameAsset();
   final jsonResponse = json.decode(jsonString);
   AllGames gameScores = new AllGames.fromJson(jsonResponse);
-  print(gameScores);
   return gameScores;
 }
 
@@ -87,4 +86,31 @@ class AllGames {
         list.map((game) => GameScore.fromJson(game)).toList();
     return AllGames(gameScores: gameScores);
   }
+}
+
+class ScoresRoundUp {
+  String winner;
+  int winningScore;
+  int numberOfPlayers;
+  String runnerUp;
+  int runnerUpScore;
+  int winMargin;
+  String loserName;
+  int loserScore;
+  double averageScore;
+  @override
+  toString() {
+    return "winner: '$winner', winningScore: '$winningScore', numberOfPlayers: '$numberOfPlayers', runnerUp: '$runnerUp', runnerUpScore: '$runnerUpScore', winMargin: '$winMargin', averageScore: $averageScore";
+  }
+
+  ScoresRoundUp(
+      this.numberOfPlayers,
+      this.runnerUp,
+      this.runnerUpScore,
+      this.winMargin,
+      this.winner,
+      this.winningScore,
+      this.loserScore,
+      this.loserName,
+      this.averageScore);
 }

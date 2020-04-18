@@ -30,18 +30,8 @@ class MyHomePage extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              stops: [
-                0.3,
-                0.6,
-                0.8,
-                0.9
-              ],
-              colors: [
-                Colors.pink[300],
-                Colors.amber[200],
-                Colors.green[300],
-                Colors.blue[200]
-              ]),
+              stops: [0.4, 0.7, 0.9],
+              colors: [Colors.pink[300], Colors.amber[300], Colors.amber[200]]),
         ),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
