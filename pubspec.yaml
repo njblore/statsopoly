@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.3 <3.0.0"
 
 dependencies:
   flutter:
@@ -36,22 +36,22 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - data/
+    - assets/
   fonts:
     - family: AmaticSC
       fonts:
-        - asset: data/fonts/AmaticSC-Regular.ttf
-        - asset: data/fonts/AmaticSC-Bold.ttf
+        - asset: assets/fonts/AmaticSC-Regular.ttf
+        - asset: assets/fonts/AmaticSC-Bold.ttf
           weight: 700
     - family: Exo
       fonts:
-        - asset: data/fonts/Exo-Regular.ttf
+        - asset: assets/fonts/Exo-Regular.ttf
     - family: JosefinSlab
       fonts:
-        - asset: data/fonts/JosefinSlab-Regular.ttf
+        - asset: assets/fonts/JosefinSlab-Regular.ttf
     - family: PoiretOne
       fonts:
-        - asset: data/fonts/PoiretOne-Regular.ttf
+        - asset: assets/fonts/PoiretOne-Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

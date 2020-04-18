@@ -42,31 +42,35 @@ class _AgricolaState extends State<Agricola> {
       );
     } else {
       return Scaffold(
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: onTabTapped,
-            items: [
-              new BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard),
-                title: Text('Roundup'),
-              ),
-              new BottomNavigationBarItem(
-                icon: Icon(Icons.donut_small),
-                title: Text('Head To Head'),
-              ),
-              new BottomNavigationBarItem(
-                icon: Icon(Icons.insert_chart),
-                title: Text('Avg Scores'),
-              ),
-              new BottomNavigationBarItem(
-                  icon: Icon(Icons.show_chart), title: Text('Categories'))
-            ],
-          ),
-          body: Center(
-              child: Container(
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTabTapped,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: this._currentIndex,
+          items: [
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              title: Text('Roundup'),
+            ),
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.donut_small),
+              title: Text('Head To Head'),
+            ),
+            new BottomNavigationBarItem(
+              icon: Icon(Icons.insert_chart),
+              title: Text('Avg Scores'),
+            ),
+            new BottomNavigationBarItem(
+                icon: Icon(Icons.show_chart), title: Text('Categories'))
+          ],
+        ),
+        body: Center(
+          child: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: this._chartPages[this._currentIndex],
-          )));
+          ),
+        ),
+      );
     }
   }
 

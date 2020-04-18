@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:scoreboards_app/components/two-player-pie.dart';
+import 'package:scoreboards_app/components/two-player-scatter.dart';
 
 class HeadToHead extends StatefulWidget {
   final AgricolaData agricolaData;
@@ -40,14 +41,26 @@ class _HeadToHeadState extends State<HeadToHead> {
         }) /
         allTashWins;
 
+    Map<int, int> getWinMargins(playerWins) {
+      return playerWins.fold({0: 0}, (tally, win) {
+        if (tally[win.winMargin] != null) {
+          tally[win.winMargin] += 1;
+        } else {
+          tally[win.winMargin] = 1;
+        }
+
+        return tally;
+      });
+    }
+
+    var tashWinMargins = getWinMargins(tashWins);
+    var thomWinMargins = getWinMargins(thomWins);
+
+    print(thomWinMargins);
     var pieCards = [
       TwoPlayerPieCard(
           'Head to Head: Overall', allTashWins, allThomWins, allTies),
-      TwoPlayerPieCard(
-          'Average Win Margins',
-          num.parse(tashAvgWinMargin.toStringAsFixed(1)),
-          num.parse(thomAvgWinMargin.toStringAsFixed(1)),
-          allTies)
+      TwoPlayerScatter('Average Win Margins', tashWinMargins, thomWinMargins)
     ];
 
     return Scaffold(

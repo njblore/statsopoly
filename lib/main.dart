@@ -26,99 +26,135 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
         body: Center(
       child: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: [0.4, 0.7, 0.9],
-              colors: [Colors.pink[300], Colors.amber[300], Colors.amber[200]]),
-        ),
+            image: DecorationImage(
+                image: AssetImage('assets/catanposter.png'),
+                fit: BoxFit.cover)),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Center(
+              Container(
                 child: Column(children: <Widget>[
-                  Text(
-                    "--------- Battle ---------",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'PoiretOne',
-                      fontSize: 20,
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.black26,
+                      border: Border(
+                          top: BorderSide(color: Colors.pink[100], width: 1.5),
+                          bottom:
+                              BorderSide(color: Colors.pink[100], width: 1.5)),
                     ),
-                  ),
-                  Text(
-                    "--- of the Scores ---",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'PoiretOne',
-                      fontSize: 20,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            "--------- Battle ---------",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'PoiretOne',
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            "--- of the Scores ---",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'PoiretOne',
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            "Statsopoly",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 60,
+                                fontFamily: 'JosefinSlab'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Statsopoly",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 65,
-                        fontFamily: 'JosefinSlab'),
                   ),
                 ]),
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage('data/marsheader.png'),
-                        width: 180.0,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/mars');
-                        },
-                        child: Material(
-                          elevation: 5.0,
+              Align(
+                alignment: Alignment(-0.7, 0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/mars');
+                  },
+                  child: Stack(
+                      overflow: Overflow.visible,
+                      alignment: Alignment.center,
+                      children: [
+                        Material(
+                          elevation: 0.0,
                           shape: CircleBorder(),
                           clipBehavior: Clip.antiAlias,
                           child: Container(
                             width: 120.0,
                             height: 120.0,
-                            decoration: new BoxDecoration(
-                              color: const Color(0xff7c94b6),
-                              image: new DecorationImage(
-                                  image: AssetImage('data/marsart.jpg'),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/marsart.jpg'),
+                                  colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.8),
+                                      BlendMode.dstATop),
                                   fit: BoxFit.cover,
                                   alignment: Alignment.centerRight),
-                              borderRadius: new BorderRadius.all(
-                                  new Radius.circular(100.0)),
-                              border: new Border.all(
-                                color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
+                              border: Border.all(
+                                color: Colors.white70,
                                 width: 2.0,
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ]),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                color: Colors.black38,
+                                blurRadius: 20.0,
+                                spreadRadius: 5.0,
+                                offset: Offset(
+                                  0.0,
+                                  0.0,
+                                ),
+                              )
+                            ]),
+                            child: Image(
+                              image: AssetImage('assets/marsheader.png'),
+                              width: 150,
+                            ),
+                          ),
+                        ),
+                      ]),
+                ),
               ),
-              Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/agricola');
-                          },
-                          child: Material(
-                            elevation: 5.0,
+              Align(
+                alignment: Alignment(-0.7, 0),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/agricola');
+                    },
+                    child: Stack(
+                        overflow: Overflow.visible,
+                        alignment: Alignment.center,
+                        children: [
+                          Material(
+                            elevation: 0.0,
                             shape: CircleBorder(),
                             clipBehavior: Clip.antiAlias,
                             child: Container(
@@ -126,24 +162,43 @@ class MyHomePage extends StatelessWidget {
                               height: 120.0,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    image: AssetImage('data/agricola.jpg'),
+                                    image: AssetImage('assets/agricola.jpg'),
+                                    colorFilter: new ColorFilter.mode(
+                                        Colors.black.withOpacity(0.8),
+                                        BlendMode.dstATop),
                                     fit: BoxFit.fitHeight,
                                     alignment: Alignment.centerLeft),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100.0)),
                                 border: Border.all(
-                                  color: Colors.white,
+                                  color: Colors.white70,
                                   width: 2.0,
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        Image(
-                          image: AssetImage('data/agricolaheader.png'),
-                          width: 180.0,
-                        )
-                      ]))
+                          Positioned(
+                            bottom: 5,
+                            child: Container(
+                              decoration: BoxDecoration(boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 20.0,
+                                  spreadRadius: 5.0,
+                                  offset: Offset(
+                                    0.0,
+                                    0.0,
+                                  ),
+                                )
+                              ]),
+                              child: Image(
+                                  image:
+                                      AssetImage('assets/agricolaheader.png'),
+                                  width: 150),
+                            ),
+                          ),
+                        ])),
+              ),
             ]),
       ),
     ));

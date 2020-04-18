@@ -3,7 +3,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
 Future<String> _loadAGameAsset() async {
-  return await rootBundle.loadString('data/scores.json');
+  return await rootBundle.loadString('assets/scores.json');
 }
 
 Future loadGame() async {
