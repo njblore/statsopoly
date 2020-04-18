@@ -87,15 +87,11 @@ class AgricolaData {
     var totals = playerScores.map((score) => score.categoryScores
         .firstWhere((category) => category.categoryName == "total")
         .categoryPoints);
-    print(totals);
 
     var grandTotal = totals.fold(0, (total, score) {
       total += score;
       return total;
     });
-
-    print(grandTotal);
-    print(playerScores.length);
 
     return grandTotal / playerScores.length;
   }

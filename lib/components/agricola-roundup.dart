@@ -46,28 +46,20 @@ class AgricolaRoundup extends StatelessWidget {
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
           )),
           child: Padding(
-            padding: EdgeInsets.all(25),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.white54,
-                  borderRadius: BorderRadius.circular(50)),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Column(
-                  children: <Widget>[
-                    Text('Agricola!'),
-                    Text('Number of games recorded: $numOfGames'),
-                    Text(
-                        'Of those, $numOfTwoPlayerGames were two player games, and $nonTwoPlayerGames were multiplayer games'),
-                    Text(
-                        'The highest score across all games was $highestScore, scored by $highestScoringPlayer!'),
-                    Text(
-                        'And the lowest score across all games was $lowestScore, scored by $lowestScoringPlayer :('),
-                    Text(
-                        'The average score across all games is a respectable $overallAverage')
-                  ],
-                ),
-              ),
+            padding: EdgeInsets.all(30),
+            child: Column(
+              children: <Widget>[
+                Text('Agricola!'),
+                Text('Number of games recorded: $numOfGames'),
+                Text(
+                    'Of those, $numOfTwoPlayerGames were two player games, and $nonTwoPlayerGames were multiplayer games'),
+                Text(
+                    'The highest score across all games was $highestScore, scored by $highestScoringPlayer!'),
+                Text(
+                    'And the lowest score across all games was $lowestScore, scored by $lowestScoringPlayer :('),
+                Text(
+                    'The average score across all games is a respectable $overallAverage')
+              ],
             ),
           ),
         ),

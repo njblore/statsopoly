@@ -56,7 +56,6 @@ class _HeadToHeadState extends State<HeadToHead> {
     var tashWinMargins = getWinMargins(tashWins);
     var thomWinMargins = getWinMargins(thomWins);
 
-    print(thomWinMargins);
     var pieCards = [
       TwoPlayerPieCard(
           'Head to Head: Overall', allTashWins, allThomWins, allTies),
