@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:scoreboards_app/components/scores-over-time.dart';
 import 'package:scoreboards_app/components/two-player-pie.dart';
 import 'package:scoreboards_app/components/two-player-scatter.dart';
 
@@ -56,10 +57,16 @@ class _HeadToHeadState extends State<HeadToHead> {
     var tashWinMargins = getWinMargins(tashWins);
     var thomWinMargins = getWinMargins(thomWins);
 
+    var twoPlayerGamesWithKnownDate = widget.agricolaData.twoPlayerData
+        .where((game) => game.datePlayed != null)
+        .toList();
+
     var pieCards = [
       TwoPlayerPieCard(
           'Head to Head', allTashWins, allThomWins, allTies, 'Overall Wins'),
-      TwoPlayerScatter('Average Win Margins', tashWinMargins, thomWinMargins)
+      TwoPlayerScatter('Win Margins', tashWinMargins, thomWinMargins),
+      ScoresOverTimeBarChart(
+          'Scores Over Time', '', twoPlayerGamesWithKnownDate)
     ];
 
     return Scaffold(
@@ -68,7 +75,7 @@ class _HeadToHeadState extends State<HeadToHead> {
           return pieCards[index];
         },
         autoplay: false,
-        itemCount: 2,
+        itemCount: pieCards.length,
         pagination: SwiperPagination(
             margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
             alignment: Alignment.bottomCenter),

@@ -19,7 +19,7 @@ class _AgricolaState extends State<Agricola> {
 
   void initialiseData() {
     loadGame().then((data) => setState(() {
-          _agricolaData = new AgricolaData(data);
+          _agricolaData = AgricolaData(data);
           _chartPages = [
             AgricolaRoundup(agricolaData: _agricolaData),
             HeadToHead(agricolaData: _agricolaData)
@@ -50,7 +50,7 @@ class _AgricolaState extends State<Agricola> {
             title: Text('Roundup'),
           ),
           new BottomNavigationBarItem(
-            icon: Icon(Icons.donut_small),
+            icon: Icon(Icons.people_outline),
             title: Text('Head To Head'),
           ),
           new BottomNavigationBarItem(

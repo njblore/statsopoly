@@ -2,8 +2,8 @@ import 'package:scoreboards_app/components/agricola-raw-data.dart';
 
 class AgricolaData {
   AllGames allData;
-  var twoPlayerData;
-  var multiplayerData;
+  List<GameScore> twoPlayerData;
+  List<GameScore> multiplayerData;
 
   List<ScoresRoundUp> allScoresRoundups;
   List<ScoresRoundUp> twoPlayerRoundups;
@@ -17,9 +17,11 @@ class AgricolaData {
   setGamedata(AllGames allGames) {
     this.allData = allGames;
     this.twoPlayerData = allGames.gameScores
-        .where((GameScore gameScore) => gameScore.playerScores.length == 2);
+        .where((GameScore gameScore) => gameScore.playerScores.length == 2)
+        .toList();
     this.multiplayerData = allGames.gameScores
-        .where((GameScore gameScore) => gameScore.playerScores.length > 2);
+        .where((GameScore gameScore) => gameScore.playerScores.length > 2)
+        .toList();
 
     List<ScoresRoundUp> scoreRoundups =
         this.getGameScoreRoundups(allGames.gameScores);
@@ -52,14 +54,13 @@ class AgricolaData {
           .categoryPoints;
       var winner = game.playerScores.last.playerName;
 
-      // REMOVE HIGHEST SCORE TO GET RUNNER UP
-      game.playerScores.removeLast();
+      var runnerup = game.playerScores[game.playerScores.length - 2];
 
-      var runnerUpScore = game.playerScores.last.categoryScores
+      var runnerUpScore = runnerup.categoryScores
           .firstWhere((category) => category.categoryName == "total")
           .categoryPoints;
 
-      var runnerUp = game.playerScores.last.playerName;
+      var runnerUp = runnerup.playerName;
       var winMargin = winningScore - runnerUpScore;
 
       // LOWEST SCORE AT THE START  OF SORTED LIST

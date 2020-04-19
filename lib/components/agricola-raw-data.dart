@@ -37,7 +37,7 @@ class PlayerScore {
 
   @override
   toString() {
-    return "player : '$playerName', scores: '$categoryScores'";
+    return "{player : '$playerName'}";
   }
 
   factory PlayerScore.fromJson(Map<String, dynamic> parsedJson) {
@@ -51,22 +51,36 @@ class PlayerScore {
 
 class GameScore {
   List<PlayerScore> playerScores;
-  String datePlayed;
+  DateTime datePlayed;
   String locationPlayed;
   GameScore({this.playerScores, this.locationPlayed, this.datePlayed});
 
   @override
   toString() {
-    return "playerscores: '$playerScores', date: '$datePlayed', location: '$locationPlayed' ";
+    return "{playerscores: ['$playerScores'], date: '$datePlayed', location: '$locationPlayed' }";
   }
 
   factory GameScore.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['players'] as List;
     List<PlayerScore> playerScores =
         list.map((player) => PlayerScore.fromJson(player)).toList();
+
+    DateTime datePlayed;
+    if (parsedJson['date'] == "unkown" || parsedJson['date'].length != 10) {
+      datePlayed = null;
+    } else {
+      var day = parsedJson['date'].substring(0, 2);
+      var month = parsedJson['date'].substring(3, 5);
+      var year = parsedJson['date'].substring(
+        6,
+      );
+      String formattedDate = "$year$month$day";
+      datePlayed = DateTime.parse(formattedDate);
+    }
+
     return GameScore(
         playerScores: playerScores,
-        datePlayed: parsedJson['date'],
+        datePlayed: datePlayed,
         locationPlayed: parsedJson['location']);
   }
 }
