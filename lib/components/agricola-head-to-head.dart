@@ -58,19 +58,21 @@ class _HeadToHeadState extends State<HeadToHead> {
 
     var pieCards = [
       TwoPlayerPieCard(
-          'Head to Head: Overall', allTashWins, allThomWins, allTies),
+          'Head to Head', allTashWins, allThomWins, allTies, 'Overall Wins'),
       TwoPlayerScatter('Average Win Margins', tashWinMargins, thomWinMargins)
     ];
 
     return Scaffold(
-      body: new Swiper(
+      body: Swiper(
         itemBuilder: (BuildContext context, int index) {
           return pieCards[index];
         },
         autoplay: false,
         itemCount: 2,
-        pagination: new SwiperPagination(),
-        control: new SwiperControl(),
+        pagination: SwiperPagination(
+            margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+            alignment: Alignment.bottomCenter),
+        control: SwiperControl(color: Colors.white70),
       ),
     );
   }

@@ -36,42 +36,41 @@ class _AgricolaState extends State<Agricola> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return Center(
-        child: Text('Loading...'),
-      );
-    } else {
-      return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
-          type: BottomNavigationBarType.fixed,
-          currentIndex: this._currentIndex,
-          items: [
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              title: Text('Roundup'),
-            ),
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.donut_small),
-              title: Text('Head To Head'),
-            ),
-            new BottomNavigationBarItem(
-              icon: Icon(Icons.insert_chart),
-              title: Text('Avg Scores'),
-            ),
-            new BottomNavigationBarItem(
-                icon: Icon(Icons.show_chart), title: Text('Categories'))
-          ],
-        ),
-        body: Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: this._chartPages[this._currentIndex],
+    return Scaffold(
+      extendBody: true,
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        onTap: onTabTapped,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: this._currentIndex,
+        items: [
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard),
+            title: Text('Roundup'),
           ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.donut_small),
+            title: Text('Head To Head'),
+          ),
+          new BottomNavigationBarItem(
+            icon: Icon(Icons.insert_chart),
+            title: Text('Avg Scores'),
+          ),
+          new BottomNavigationBarItem(
+              icon: Icon(Icons.show_chart), title: Text('Categories'))
+        ],
+      ),
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: isLoading
+              ? Text('Loading...')
+              : this._chartPages[this._currentIndex],
         ),
-      );
-    }
+      ),
+    );
   }
 
   void onTabTapped(int index) {

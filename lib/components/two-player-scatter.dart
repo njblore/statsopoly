@@ -30,8 +30,9 @@ class _TwoPlayerScatterState extends State<TwoPlayerScatter> {
 
   List<ScatterSpot> makeScatter(winMargin, Color color) {
     return winMargin.entries
-        .map<ScatterSpot>((marginTally) =>
-            new ScatterSpot(marginTally.key, marginTally.value, color: color))
+        .map<ScatterSpot>((marginTally) => new ScatterSpot(
+            marginTally.key.toDouble(), marginTally.value.toDouble(),
+            color: color))
         .toList();
   }
 }

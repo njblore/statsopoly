@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
+import 'package:scoreboards_app/models/agricola-background.dart';
 
 class AgricolaRoundup extends StatelessWidget {
   final AgricolaData agricolaData;
@@ -36,20 +37,32 @@ class AgricolaRoundup extends StatelessWidget {
         .toStringAsFixed(1);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          iconSize: 40,
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.lightGreen[100],
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+      ),
       body: Center(
         child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage('assets/agPosterPlain.png'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-          )),
+          decoration: agricolaBackground,
           child: Padding(
             padding: EdgeInsets.all(30),
             child: Column(
               children: <Widget>[
-                Text('Agricola!'),
+                Text('Agricola',
+                    style: Theme.of(context).primaryTextTheme.headline),
+                Container(
+                  child:
+                      Text('A summary of Games', textAlign: TextAlign.justify),
+                ),
                 Text('Number of games recorded: $numOfGames'),
                 Text(
                     'Of those, $numOfTwoPlayerGames were two player games, and $nonTwoPlayerGames were multiplayer games'),
