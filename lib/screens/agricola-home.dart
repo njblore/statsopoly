@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
-import 'package:scoreboards_app/components/agricola-head-to-head.dart';
+import 'package:scoreboards_app/components/agricola-wins.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
 import 'package:scoreboards_app/components/agricola-roundup.dart';
 
@@ -22,7 +22,7 @@ class _AgricolaState extends State<Agricola> {
           _agricolaData = AgricolaData(data);
           _chartPages = [
             AgricolaRoundup(agricolaData: _agricolaData),
-            HeadToHead(agricolaData: _agricolaData)
+            AgricolaWins(agricolaData: _agricolaData)
           ];
           isLoading = false;
         }));
@@ -46,12 +46,12 @@ class _AgricolaState extends State<Agricola> {
         currentIndex: this._currentIndex,
         items: [
           new BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
+            icon: Icon(Icons.import_contacts),
             title: Text('Roundup'),
           ),
           new BottomNavigationBarItem(
-            icon: Icon(Icons.people_outline),
-            title: Text('Head To Head'),
+            icon: Icon(Icons.local_activity),
+            title: Text('Wins'),
           ),
           new BottomNavigationBarItem(
             icon: Icon(Icons.insert_chart),

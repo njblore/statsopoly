@@ -17,18 +17,15 @@ final ThemeData AppThemeData = ThemeData(
           fontFamily: 'AmaticSC',
           color: Colors.brown[800],
           fontWeight: FontWeight.bold,
-          fontSize: 30),
+          fontSize: 20),
       body1: TextStyle(
           fontFamily: 'JosefinSlab',
           fontWeight: FontWeight.normal,
           fontSize: 15,
           color: Colors.brown[900]),
       caption: TextStyle(
-          fontFamily: 'Exo',
+          fontFamily: 'JosefinSlab',
           fontWeight: FontWeight.bold,
-          fontSize: 18,
-          color: Colors.white,
-          shadows: [
-            Shadow(color: Colors.black26, offset: Offset.zero, blurRadius: 0.0)
-          ])),
+          fontSize: 20,
+          color: Colors.white70)),
 );

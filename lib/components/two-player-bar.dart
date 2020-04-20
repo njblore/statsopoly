@@ -1,26 +1,23 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/models/agricola-background.dart';
 import 'package:scoreboards_app/models/indicator.dart';
 
-class TwoPlayerScatter extends StatefulWidget {
-  TwoPlayerScatter(this.title, this.tashWinMargins, this.thomWinMargins);
+class TwoPlayerBar extends StatefulWidget {
+  TwoPlayerBar(this.title, this.tashWinMargins, this.thomWinMargins);
 
   final String title;
   final Map<int, int> tashWinMargins;
   final Map<int, int> thomWinMargins;
 
   @override
-  _TwoPlayerScatterState createState() => _TwoPlayerScatterState();
+  _TwoPlayerBarState createState() => _TwoPlayerBarState();
 }
 
-class _TwoPlayerScatterState extends State<TwoPlayerScatter> {
+class _TwoPlayerBarState extends State<TwoPlayerBar> {
   Widget build(BuildContext context) {
-    List<ScatterSpot> scatterSpots = [
-      ...makeScatter(widget.tashWinMargins, Colors.pink[300]),
-      ...makeScatter(widget.thomWinMargins, Colors.green[700])
-    ];
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -58,10 +55,10 @@ class _TwoPlayerScatterState extends State<TwoPlayerScatter> {
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                        minHeight: MediaQuery.of(context).size.height * 0.6,
+                        minHeight: MediaQuery.of(context).size.height * 0.5,
                         minWidth: MediaQuery.of(context).size.width * 0.8),
-                    child: ScatterChart(
-                      ScatterChartData(
+                    child: BarChart(
+                      BarChartData(
                         titlesData: FlTitlesData(
                             bottomTitles: SideTitles(
                               showTitles: true,
@@ -73,7 +70,7 @@ class _TwoPlayerScatterState extends State<TwoPlayerScatter> {
                                 showTitles: true)),
                         backgroundColor: Colors.white24,
                         borderData: FlBorderData(show: false),
-                        scatterSpots: scatterSpots,
+                        barGroups: makeBarGroups(),
                         gridData: FlGridData(show: false),
                         axisTitleData: FlAxisTitleData(
                             bottomTitle: AxisTitle(
@@ -112,11 +109,38 @@ class _TwoPlayerScatterState extends State<TwoPlayerScatter> {
     );
   }
 
-  List<ScatterSpot> makeScatter(winMargin, Color color) {
-    return winMargin.entries
-        .map<ScatterSpot>((marginTally) => new ScatterSpot(
-            marginTally.key.toDouble(), marginTally.value.toDouble(),
-            color: color))
-        .toList();
+  List<BarChartGroupData> makeBarGroups() {
+    var maxMargin = max(widget.tashWinMargins.keys.reduce(max),
+        widget.thomWinMargins.keys.reduce(max));
+
+    List<BarChartGroupData> barGroups = [];
+
+    for (var i = 0; i <= maxMargin; i++) {
+      var tashFrequency = widget.tashWinMargins[i] != null
+          ? widget.tashWinMargins[i].toDouble()
+          : 0.0;
+      var thomFrequency = widget.thomWinMargins[i] != null
+          ? widget.thomWinMargins[i].toDouble()
+          : 0.0;
+
+      barGroups.add(makeGroupData(i, tashFrequency, thomFrequency));
+    }
+
+    return barGroups;
+  }
+
+  BarChartGroupData makeGroupData(int x, double y1, double y2) {
+    return BarChartGroupData(barsSpace: 1, x: x, barRods: [
+      BarChartRodData(
+        y: y1,
+        color: Colors.pink[300],
+        width: 2,
+      ),
+      BarChartRodData(
+        y: y2,
+        color: Colors.green[700],
+        width: 2,
+      ),
+    ]);
   }
 }

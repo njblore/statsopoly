@@ -3,21 +3,30 @@ import 'package:flutter/material.dart';
 import '../models/indicator.dart';
 import '../models/agricola-background.dart';
 
-class TwoPlayerPieCard extends StatefulWidget {
-  TwoPlayerPieCard(this.title, this.playerOneWins, this.playerTwoWins,
-      this.ties, this.subtitle);
-  final double playerOneWins;
-  final double playerTwoWins;
-  final double ties;
+class WinPieCard extends StatefulWidget {
+  WinPieCard(
+      this.title, this.playerWins, this.twoPlayerWins, this.multiplayerWins);
+  final Map<String, double> playerWins;
+  final Map<String, double> twoPlayerWins;
+  final Map<String, double> multiplayerWins;
   final String title;
-  final String subtitle;
 
   @override
-  _TwoPlayerPieCardState createState() => _TwoPlayerPieCardState();
+  _WinPieCardState createState() => _WinPieCardState();
 }
 
-class _TwoPlayerPieCardState extends State<TwoPlayerPieCard> {
+class _WinPieCardState extends State<WinPieCard> {
   int touchedIndex;
+  Map<String, double> winCounts;
+  String selected;
+
+  void initState() {
+    super.initState();
+    setState(() {
+      winCounts = widget.twoPlayerWins;
+      selected = "twoPlayer";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +63,51 @@ class _TwoPlayerPieCardState extends State<TwoPlayerPieCard> {
                         widget.title,
                         style: Theme.of(context).primaryTextTheme.title,
                       ),
-                      Text(
-                        widget.subtitle,
-                        style: Theme.of(context).primaryTextTheme.subtitle,
-                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          FlatButton(
+                              color: selected == "twoPlayer"
+                                  ? Colors.lightGreen[200]
+                                  : Colors.transparent,
+                              splashColor: Colors.lightBlue[200],
+                              onPressed: () => setState(() {
+                                    winCounts = widget.twoPlayerWins;
+                                    selected = "twoPlayer";
+                                  }),
+                              child: Text('Two Player',
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle)),
+                          FlatButton(
+                              color: selected == "multiplayer"
+                                  ? Colors.lightGreen[200]
+                                  : Colors.transparent,
+                              splashColor: Colors.lightBlue[200],
+                              onPressed: () => setState(() {
+                                    winCounts = widget.multiplayerWins;
+                                    selected = "multiplayer";
+                                  }),
+                              child: Text('Multiplayer',
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle)),
+                          FlatButton(
+                              color: selected == "allGames"
+                                  ? Colors.lightGreen[200]
+                                  : Colors.transparent,
+                              splashColor: Colors.lightBlue[200],
+                              onPressed: () => setState(() {
+                                    winCounts = widget.playerWins;
+                                    selected = "allGames";
+                                  }),
+                              child: Text('All Games',
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle))
+                        ],
+                      )
                     ],
                   ),
                   PieChart(
@@ -81,28 +131,8 @@ class _TwoPlayerPieCardState extends State<TwoPlayerPieCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Indicator(
-                          color: Colors.pink[300],
-                          text: 'Tash',
-                          isSquare: false,
-                          size: 16,
-                          textColor: Colors.white70,
-                        ),
-                        Indicator(
-                          color: Colors.green[700],
-                          text: 'Thom',
-                          isSquare: false,
-                          size: 16,
-                          textColor: Colors.white70,
-                        ),
-                        Indicator(
-                          color: Colors.grey,
-                          text: 'Tie',
-                          isSquare: false,
-                          size: 16,
-                          textColor: Colors.white70,
-                        ),
-                      ])
+                        ...generateIndicators(),
+                      ]),
                 ],
               ),
             ),
@@ -112,38 +142,44 @@ class _TwoPlayerPieCardState extends State<TwoPlayerPieCard> {
     );
   }
 
+  List<Color> colorList = [
+    Colors.green[600],
+    Colors.pink[200],
+    Colors.blueGrey[300],
+    Colors.purple[100],
+    Colors.orange[700],
+    Colors.teal[300],
+  ];
+
   List<PieChartSectionData> showingSections() {
-    return List.generate(3, (i) {
+    List<PieChartSectionData> data = [];
+    var wins = this.winCounts.values.toList();
+    for (var i = 0; i < wins.length; i++) {
       final isTouched = i == touchedIndex;
       final double radius = isTouched ? 80 : 50;
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            value: widget.playerOneWins,
-            color: Colors.pink[300],
-            title: widget.playerOneWins.toString(),
-            radius: radius,
-            titleStyle: Theme.of(context).primaryTextTheme.caption,
-          );
-        case 1:
-          return PieChartSectionData(
-            value: widget.playerTwoWins,
-            color: Colors.lightGreen[700],
-            title: widget.playerTwoWins.toString(),
-            radius: radius,
-            titleStyle: Theme.of(context).primaryTextTheme.caption,
-          );
-        case 2:
-          return PieChartSectionData(
-            value: widget.ties,
-            color: Colors.grey,
-            title: widget.ties.toString(),
-            titleStyle: Theme.of(context).primaryTextTheme.caption,
-            radius: radius,
-          );
-        default:
-          return null;
-      }
-    });
+
+      data.add(PieChartSectionData(
+          value: wins[i],
+          color: colorList[i],
+          title: wins[i].toStringAsFixed(0),
+          radius: radius,
+          titleStyle: Theme.of(context).primaryTextTheme.caption));
+    }
+
+    return data;
+  }
+
+  List<Indicator> generateIndicators() {
+    var wins = this.winCounts.keys.toList();
+    List<Indicator> playerIndicators = [];
+    for (var i = 0; i < wins.length; i++) {
+      playerIndicators.add(Indicator(
+          color: colorList[i],
+          text: wins[i],
+          isSquare: false,
+          size: 16,
+          textColor: Colors.brown[700]));
+    }
+    return playerIndicators;
   }
 }
