@@ -3,7 +3,7 @@ import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
 import 'package:scoreboards_app/components/scores-over-time.dart';
-import 'package:scoreboards_app/components/two-player-pie.dart';
+import 'package:scoreboards_app/components/win-pie.dart';
 import 'package:scoreboards_app/components/two-player-bar.dart';
 
 class AgricolaWins extends StatefulWidget {
@@ -67,9 +67,9 @@ class _AgricolaWinsState extends State<AgricolaWins> {
         .where((game) => game.datePlayed != null)
         .toList();
 
-    var pieCards = [
+    var winCards = [
       WinPieCard('Overall Wins', allPlayerWins, twoPlayerWins, multiplayerWins),
-      TwoPlayerBar('Win Margins', tashWinMargins, thomWinMargins),
+      TwoPlayerWinsBar('Win Margins', tashWinMargins, thomWinMargins),
       ScoresOverTimeBarChart(
           'Scores Over Time', '', twoPlayerGamesWithKnownDate)
     ];
@@ -77,10 +77,10 @@ class _AgricolaWinsState extends State<AgricolaWins> {
     return Scaffold(
       body: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return pieCards[index];
+          return winCards[index];
         },
         autoplay: false,
-        itemCount: pieCards.length,
+        itemCount: winCards.length,
         pagination: SwiperPagination(
             margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
             alignment: Alignment.bottomCenter),

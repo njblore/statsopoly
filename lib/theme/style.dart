@@ -17,7 +17,7 @@ final ThemeData AppThemeData = ThemeData(
           fontFamily: 'AmaticSC',
           color: Colors.brown[800],
           fontWeight: FontWeight.bold,
-          fontSize: 20),
+          fontSize: 25),
       body1: TextStyle(
           fontFamily: 'JosefinSlab',
           fontWeight: FontWeight.normal,
@@ -27,5 +27,7 @@ final ThemeData AppThemeData = ThemeData(
           fontFamily: 'JosefinSlab',
           fontWeight: FontWeight.bold,
           fontSize: 20,
-          color: Colors.white70)),
+          color: Colors.white70),
+      body2: TextStyle(
+          fontFamily: 'JoesfinSlab', fontSize: 10, color: Colors.brown[800])),
 );
