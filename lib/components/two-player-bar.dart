@@ -17,13 +17,15 @@ class TwoPlayerWinsBar extends StatefulWidget {
 }
 
 class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
+  int touchedIndex;
   Widget build(BuildContext context) {
     var thomWinAvg =
         widget.thomWinMargins.keys.fold(0, (total, margin) => total += margin) /
-            widget.tashWinMargins.keys.length;
+            widget.thomWinMargins.keys.length;
     var tashWinAvg =
         widget.tashWinMargins.keys.fold(0, (total, margin) => total += margin) /
             widget.tashWinMargins.keys.length;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -57,51 +59,52 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                         widget.title,
                         style: Theme.of(context).primaryTextTheme.title,
                       ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(3)),
+                            color: Colors.lightGreen[200]),
+                        child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+                                  width: 30,
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(tashWinAvg.toStringAsFixed(0),
+                                        style: Theme.of(context)
+                                            .primaryTextTheme
+                                            .subtitle),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.pink[300],
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  )),
+                              Text(
+                                "<- Average ->",
+                                style:
+                                    Theme.of(context).primaryTextTheme.subtitle,
+                              ),
+                              Container(
+                                  width: 30,
+                                  height: 30,
+                                  child: Center(
+                                    child: Text(thomWinAvg.toStringAsFixed(0),
+                                        style: Theme.of(context)
+                                            .primaryTextTheme
+                                            .subtitle),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.teal[400],
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  )),
+                            ]),
+                      ),
                     ],
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
-                        color: Colors.lightGreen[200]),
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Container(
-                              width: 40,
-                              height: 40,
-                              child: Center(
-                                child: Text(tashWinAvg.toStringAsFixed(0),
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .subtitle),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.pink[300],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                              )),
-                          Text(
-                            "<- Average ->",
-                            style: Theme.of(context).primaryTextTheme.subtitle,
-                          ),
-                          Container(
-                              width: 40,
-                              height: 40,
-                              child: Center(
-                                child: Text(thomWinAvg.toStringAsFixed(0),
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .subtitle),
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.teal[400],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                              )),
-                        ]),
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
@@ -111,44 +114,79 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                       padding: EdgeInsets.only(right: 10, top: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
-                        color: Colors.white70,
+                        color: Colors.white38,
                       ),
                       child: BarChart(
                         BarChartData(
-                          titlesData: FlTitlesData(
-                              bottomTitles: SideTitles(
-                                textStyle:
-                                    Theme.of(context).primaryTextTheme.body2,
-                                showTitles: true,
-                                interval: 2.0,
-                                rotateAngle: 90,
-                                getTitles: (title) => title.toStringAsFixed(0),
-                              ),
-                              leftTitles: SideTitles(
+                            titlesData: FlTitlesData(
+                                bottomTitles: SideTitles(
                                   textStyle:
                                       Theme.of(context).primaryTextTheme.body2,
-                                  margin: 0.5,
+                                  showTitles: true,
+                                  interval: 2.0,
+                                  rotateAngle: 90,
                                   getTitles: (title) =>
                                       title.toStringAsFixed(0),
-                                  showTitles: true)),
-                          backgroundColor: Colors.transparent,
-                          borderData: FlBorderData(show: false),
-                          barGroups: makeBarGroups(),
-                          gridData: FlGridData(
-                              show: true,
-                              drawVerticalLine: true,
-                              drawHorizontalLine: false,
-                              verticalInterval: 1),
-                          axisTitleData: FlAxisTitleData(
-                            bottomTitle: AxisTitle(
-                              titleText: 'Win Margin',
-                              showTitle: true,
-                              textStyle:
-                                  Theme.of(context).primaryTextTheme.body2,
-                            ),
-                            show: true,
-                          ),
-                        ),
+                                ),
+                                leftTitles: SideTitles(
+                                    textStyle: Theme.of(context)
+                                        .primaryTextTheme
+                                        .body2,
+                                    margin: 0.5,
+                                    getTitles: (title) =>
+                                        title.toStringAsFixed(0),
+                                    showTitles: true)),
+                            backgroundColor: Colors.transparent,
+                            borderData: FlBorderData(show: false),
+                            barGroups: makeBarGroups(),
+                            barTouchData: BarTouchData(
+                              touchTooltipData: BarTouchTooltipData(
+                                  tooltipBgColor: Colors.blueGrey,
+                                  getTooltipItem:
+                                      (group, groupIndex, rod, rodIndex) {
+                                    String playerName;
+                                    switch (rodIndex) {
+                                      case 0:
+                                        playerName = "Tash";
+                                        break;
+                                      case 1:
+                                        playerName = "Thom";
+                                        break;
+                                    }
+                                    String timeCounts;
+                                    switch (rod.y.toInt()) {
+                                      case 1:
+                                        timeCounts = " time ";
+                                        break;
+                                      default:
+                                        timeCounts = " times ";
+                                        break;
+                                    }
+                                    return BarTooltipItem(
+                                        playerName +
+                                            " won by " +
+                                            group.x.toString() +
+                                            " points" +
+                                            '\n' +
+                                            (rod.y).toStringAsFixed(0) +
+                                            timeCounts,
+                                        TextStyle(color: Colors.yellow));
+                                  }),
+                              touchCallback: (barTouchResponse) {
+                                setState(() {
+                                  if (barTouchResponse.spot != null &&
+                                      barTouchResponse.touchInput
+                                          is! FlPanEnd &&
+                                      barTouchResponse.touchInput
+                                          is! FlLongPressEnd) {
+                                    touchedIndex = barTouchResponse
+                                        .spot.touchedBarGroupIndex;
+                                  } else {
+                                    touchedIndex = -1;
+                                  }
+                                });
+                              },
+                            )),
                       ),
                     ),
                   ),
@@ -161,6 +199,7 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                           text: 'Tash',
                           isSquare: false,
                           size: 16,
+                          fontSize: 20,
                           textColor: Colors.brown[800],
                         ),
                         Indicator(
@@ -168,6 +207,7 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                           text: 'Thom',
                           isSquare: false,
                           size: 16,
+                          fontSize: 20,
                           textColor: Colors.brown[800],
                         ),
                       ])
@@ -178,6 +218,40 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
         ],
       ),
     );
+  }
+
+  BarChartGroupData makeGroupData(
+    int x,
+    double y1,
+    double y2,
+    bool isTouched,
+  ) {
+    return BarChartGroupData(barsSpace: 1, x: x, barRods: [
+      BarChartRodData(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(6), topRight: Radius.circular(6)),
+        y: y1,
+        color: isTouched ? Colors.yellow : Color.fromRGBO(194, 93, 138, 1),
+        width: 4,
+        backDrawRodData: BackgroundBarChartRodData(
+          show: true,
+          y: 6,
+          color: Color.fromRGBO(194, 93, 138, 0.2),
+        ),
+      ),
+      BarChartRodData(
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(6), topRight: Radius.circular(6)),
+        y: y2,
+        color: isTouched ? Colors.yellow : Color.fromRGBO(66, 168, 151, 1),
+        width: 4,
+        backDrawRodData: BackgroundBarChartRodData(
+          show: true,
+          y: 6,
+          color: Color.fromRGBO(72, 189, 169, 0.2),
+        ),
+      ),
+    ]);
   }
 
   List<BarChartGroupData> makeBarGroups() {
@@ -194,24 +268,11 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
           ? widget.thomWinMargins[i].toDouble()
           : 0.0;
 
-      barGroups.add(makeGroupData(i, tashFrequency, thomFrequency));
+      var isTouched = i == touchedIndex;
+
+      barGroups.add(makeGroupData(i, tashFrequency, thomFrequency, isTouched));
     }
 
     return barGroups;
-  }
-
-  BarChartGroupData makeGroupData(int x, double y1, double y2) {
-    return BarChartGroupData(barsSpace: 1, x: x, barRods: [
-      BarChartRodData(
-        y: y1,
-        color: Colors.pink[200],
-        width: 3,
-      ),
-      BarChartRodData(
-        y: y2,
-        color: Colors.teal[400],
-        width: 3,
-      ),
-    ]);
   }
 }

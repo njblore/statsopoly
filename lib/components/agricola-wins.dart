@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
-import 'package:scoreboards_app/components/scores-over-time.dart';
+import 'package:scoreboards_app/components/agricola-win-lose-bars.dart';
 import 'package:scoreboards_app/components/win-pie.dart';
 import 'package:scoreboards_app/components/two-player-bar.dart';
+import 'package:scoreboards_app/models/agricola-background.dart';
 
 class AgricolaWins extends StatefulWidget {
   final AgricolaData agricolaData;
@@ -63,29 +64,23 @@ class _AgricolaWinsState extends State<AgricolaWins> {
     var tashWinMargins = getWinMargins("Tash");
     var thomWinMargins = getWinMargins("Thom");
 
-    var twoPlayerGamesWithKnownDate = widget.agricolaData.twoPlayerData
-        .where((game) => game.datePlayed != null)
-        .toList();
-
     var winCards = [
       WinPieCard('Overall Wins', allPlayerWins, twoPlayerWins, multiplayerWins),
       TwoPlayerWinsBar('Win Margins', tashWinMargins, thomWinMargins),
-      ScoresOverTimeBarChart(
-          'Scores Over Time', '', twoPlayerGamesWithKnownDate)
     ];
 
     return Scaffold(
-      body: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return winCards[index];
-        },
-        autoplay: false,
-        itemCount: winCards.length,
-        pagination: SwiperPagination(
-            margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
-            alignment: Alignment.bottomCenter),
-        control: SwiperControl(color: Colors.white70),
-      ),
-    );
+        body: Swiper(
+      itemBuilder: (BuildContext context, int index) {
+        return winCards[index];
+      },
+      autoplay: false,
+      itemCount: winCards.length,
+      pagination: SwiperPagination(
+          margin: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+          alignment: Alignment.bottomCenter),
+      control: SwiperControl(color: Colors.white70),
+      loop: false,
+    ));
   }
 }

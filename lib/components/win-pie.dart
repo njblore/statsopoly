@@ -178,6 +178,7 @@ class _WinPieCardState extends State<WinPieCard> {
           text: wins[i],
           isSquare: false,
           size: 16,
+          fontSize: 20,
           textColor: Colors.brown[700]));
     }
     return playerIndicators;

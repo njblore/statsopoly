@@ -53,6 +53,10 @@ class AgricolaData {
           .firstWhere((category) => category.categoryName == "total")
           .categoryPoints;
       var winner = game.playerScores.last.playerName;
+      var winnerScores = game.playerScores
+          .firstWhere((scores) => scores.playerName == winner)
+          .categoryScores;
+      print(winnerScores);
 
       var runnerup = game.playerScores[game.playerScores.length - 2];
 
@@ -69,6 +73,9 @@ class AgricolaData {
           .categoryPoints;
 
       var lowestScoringPlayer = game.playerScores.first.playerName;
+      var losingScores = game.playerScores
+          .firstWhere((scores) => scores.playerName == lowestScoringPlayer)
+          .categoryScores;
 
       gameList.add(new ScoresRoundUp(
           numberOfPlayers,
@@ -79,7 +86,9 @@ class AgricolaData {
           winningScore,
           lowestScore,
           lowestScoringPlayer,
-          averageScore));
+          averageScore,
+          winnerScores,
+          losingScores));
     }
     return gameList;
   }

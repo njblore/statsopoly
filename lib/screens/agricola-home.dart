@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
+import 'package:scoreboards_app/components/agricola-scores.dart';
 import 'package:scoreboards_app/components/agricola-wins.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
 import 'package:scoreboards_app/components/agricola-roundup.dart';
@@ -22,7 +23,8 @@ class _AgricolaState extends State<Agricola> {
           _agricolaData = AgricolaData(data);
           _chartPages = [
             AgricolaRoundup(agricolaData: _agricolaData),
-            AgricolaWins(agricolaData: _agricolaData)
+            AgricolaWins(agricolaData: _agricolaData),
+            AgricolaScores(agricolaData: _agricolaData)
           ];
           isLoading = false;
         }));
@@ -54,11 +56,11 @@ class _AgricolaState extends State<Agricola> {
             title: Text('Wins'),
           ),
           new BottomNavigationBarItem(
-            icon: Icon(Icons.insert_chart),
-            title: Text('Avg Scores'),
+            icon: Icon(Icons.multiline_chart),
+            title: Text('Scores'),
           ),
           new BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart), title: Text('Categories'))
+              icon: Icon(Icons.group_work), title: Text('Categories'))
         ],
       ),
       body: Center(

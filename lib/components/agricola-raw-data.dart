@@ -112,6 +112,8 @@ class ScoresRoundUp {
   String loserName;
   int loserScore;
   double averageScore;
+  List<CategoryScore> winnerScores;
+  List<CategoryScore> loserScores;
   @override
   toString() {
     return "winner: '$winner', winningScore: '$winningScore', numberOfPlayers: '$numberOfPlayers', runnerUp: '$runnerUp', runnerUpScore: '$runnerUpScore', winMargin: '$winMargin', averageScore: $averageScore";
@@ -126,5 +128,7 @@ class ScoresRoundUp {
       this.winningScore,
       this.loserScore,
       this.loserName,
-      this.averageScore);
+      this.averageScore,
+      this.winnerScores,
+      this.loserScores);
 }

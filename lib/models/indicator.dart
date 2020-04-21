@@ -6,46 +6,50 @@ class Indicator extends StatelessWidget {
   final bool isSquare;
   final double size;
   final Color textColor;
+  final double fontSize;
 
   const Indicator({
     Key key,
     this.color,
     this.text,
     this.isSquare,
-    this.size = 16,
+    this.size,
+    this.fontSize,
     this.textColor = const Color(0xff505050),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2),
-          color: Colors.blueGrey[200],
-        ),
-        padding: EdgeInsets.all(5),
-        child: Row(
-          children: <Widget>[
-            Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
-                color: color,
-              ),
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: Colors.blueGrey[200],
             ),
-            const SizedBox(
-              width: 4,
-            ),
-            Text(
-              text,
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                  fontFamily: 'AmaticSC'),
-            )
-          ],
-        ));
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: size,
+                  height: size,
+                  decoration: BoxDecoration(
+                    shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
+                    color: color,
+                  ),
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  text,
+                  style: TextStyle(
+                      fontSize: this.fontSize,
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
+                      fontFamily: 'AmaticSC'),
+                )
+              ],
+            )));
   }
 }
