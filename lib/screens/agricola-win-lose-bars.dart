@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
-import 'package:scoreboards_app/models/agricola-background.dart';
-import 'package:scoreboards_app/models/indicator.dart';
+import 'package:scoreboards_app/components/agricola-background.dart';
+import 'package:scoreboards_app/components/indicator.dart';
 
 class WinLoseBars extends StatefulWidget {
   WinLoseBars(this.title, this.allScoresRoundups);
@@ -46,8 +46,8 @@ class _WinLoseBarsState extends State<WinLoseBars> {
             decoration: agricolaBackground,
           ),
           Container(
-            height:
-                MediaQuery.of(context).size.height - kBottomNavigationBarHeight,
+            padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+            height: MediaQuery.of(context).size.height,
             color: Colors.transparent,
             child: Center(
               child: Column(

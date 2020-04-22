@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:scoreboards_app/components/agricola-win-lose-bars.dart';
-import 'package:scoreboards_app/components/scores-over-time.dart';
+import 'package:scoreboards_app/screens/agricola-win-lose-bars.dart';
+import 'package:scoreboards_app/screens/scores-over-time.dart';
 
 class AgricolaScores extends StatefulWidget {
   final AgricolaData agricolaData;

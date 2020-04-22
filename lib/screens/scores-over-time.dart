@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
-import '../models/indicator.dart';
-import '../models/agricola-background.dart';
+import '../components/indicator.dart';
+import '../components/agricola-background.dart';
 
 class ScoresOverTimeBarChart extends StatefulWidget {
   ScoresOverTimeBarChart(this.title, this.subtitle, this.games);

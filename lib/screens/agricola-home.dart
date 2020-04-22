@@ -3,9 +3,9 @@ import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:scoreboards_app/components/agricola-scores.dart';
 import 'package:scoreboards_app/components/agricola-wins.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
-import 'package:scoreboards_app/components/agricola-roundup.dart';
-import 'package:scoreboards_app/models/agricola-background.dart';
-import 'package:scoreboards_app/models/loading-page.dart';
+import 'package:scoreboards_app/screens/agricola-roundup.dart';
+import 'package:scoreboards_app/components/agricola-background.dart';
+import 'package:scoreboards_app/components/loading-page.dart';
 
 class Agricola extends StatefulWidget {
   @override

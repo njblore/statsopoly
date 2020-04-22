@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
-import 'package:scoreboards_app/models/agricola-background.dart';
+import 'package:scoreboards_app/components/agricola-background.dart';
 
 class AgricolaRoundup extends StatelessWidget {
   final AgricolaData agricolaData;

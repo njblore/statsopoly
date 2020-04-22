@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
-import 'package:scoreboards_app/components/agricola-win-lose-bars.dart';
-import 'package:scoreboards_app/components/win-pie.dart';
-import 'package:scoreboards_app/components/two-player-bar.dart';
-import 'package:scoreboards_app/models/agricola-background.dart';
+import 'package:scoreboards_app/screens/agricola-win-lose-bars.dart';
+import 'package:scoreboards_app/screens/win-pie.dart';
+import 'package:scoreboards_app/screens/two-player-bar.dart';
+import 'package:scoreboards_app/components/agricola-background.dart';
 
 class AgricolaWins extends StatefulWidget {
   final AgricolaData agricolaData;

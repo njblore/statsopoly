@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import '../models/indicator.dart';
-import '../models/agricola-background.dart';
+import '../components/indicator.dart';
+import '../components/agricola-background.dart';
 
 class WinPieCard extends StatefulWidget {
   WinPieCard(

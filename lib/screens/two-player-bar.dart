@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:scoreboards_app/models/agricola-background.dart';
-import 'package:scoreboards_app/models/indicator.dart';
+import 'package:scoreboards_app/components/agricola-background.dart';
+import 'package:scoreboards_app/components/indicator.dart';
 
 class TwoPlayerWinsBar extends StatefulWidget {
   TwoPlayerWinsBar(this.title, this.tashWinMargins, this.thomWinMargins);
