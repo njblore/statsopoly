@@ -231,7 +231,7 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(6), topRight: Radius.circular(6)),
         y: y1,
-        color: isTouched ? Colors.yellow : Color.fromRGBO(194, 93, 138, 1),
+        color: isTouched ? Colors.yellow : Colors.pink[300],
         width: 4,
         backDrawRodData: BackgroundBarChartRodData(
           show: true,
@@ -243,7 +243,7 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(6), topRight: Radius.circular(6)),
         y: y2,
-        color: isTouched ? Colors.yellow : Color.fromRGBO(66, 168, 151, 1),
+        color: isTouched ? Colors.yellow : Colors.teal[400],
         width: 4,
         backDrawRodData: BackgroundBarChartRodData(
           show: true,

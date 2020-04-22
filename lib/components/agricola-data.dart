@@ -56,7 +56,6 @@ class AgricolaData {
       var winnerScores = game.playerScores
           .firstWhere((scores) => scores.playerName == winner)
           .categoryScores;
-      print(winnerScores);
 
       var runnerup = game.playerScores[game.playerScores.length - 2];
 

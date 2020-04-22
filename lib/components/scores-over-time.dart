@@ -60,43 +60,53 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
                   constraints: BoxConstraints(
                       minHeight: MediaQuery.of(context).size.height * 0.5,
                       minWidth: MediaQuery.of(context).size.width * 0.8),
-                  child: LineChart(LineChartData(
-                    titlesData: FlTitlesData(
-                        bottomTitles: SideTitles(
-                          showTitles: true,
-                          interval: 1,
-                          getTitles: (title) {
-                            var date = widget.games[title.toInt()].datePlayed;
-                            var month = date.month;
-                            var year = date.year;
-                            return "$month/$year";
-                          },
-                          rotateAngle: 90,
-                        ),
-                        leftTitles: SideTitles(
-                            showTitles: false,
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10, top: 10, bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(3)),
+                      color: Colors.white38,
+                    ),
+                    child: LineChart(LineChartData(
+                      titlesData: FlTitlesData(
+                          bottomTitles: SideTitles(
+                            showTitles: true,
                             interval: 2,
-                            getTitles: (title) => title.toStringAsFixed(0))),
-                    lineBarsData: showLines(),
-                  )),
+                            getTitles: (title) {
+                              var date = widget.games[title.toInt()].datePlayed;
+                              var month = date.month;
+                              var year = date.year;
+                              return "$month/$year";
+                            },
+                            rotateAngle: 90,
+                          ),
+                          leftTitles: SideTitles(
+                              margin: 1,
+                              showTitles: true,
+                              interval: 2,
+                              getTitles: (title) => title.toStringAsFixed(0))),
+                      lineBarsData: showLines(),
+                    )),
+                  ),
                 ),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Indicator(
-                        color: Colors.pink[300],
+                        color: Colors.pink[200],
                         text: 'Tash',
                         isSquare: false,
                         size: 16,
-                        textColor: Colors.white70,
+                        fontSize: 20,
+                        textColor: Colors.brown[800],
                       ),
                       Indicator(
-                        color: Colors.green[700],
+                        color: Colors.teal[300],
                         text: 'Thom',
                         isSquare: false,
                         size: 16,
-                        textColor: Colors.white70,
+                        fontSize: 20,
+                        textColor: Colors.brown[800],
                       ),
                     ])
               ],
@@ -138,7 +148,7 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
       colors: [
         Colors.pink[300],
       ],
-      barWidth: 5,
+      barWidth: 3,
       isStrokeCapRound: true,
       dotData: FlDotData(
         show: false,
@@ -152,9 +162,9 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
       spots: thomSpots,
       isCurved: true,
       colors: [
-        Colors.green[700],
+        Colors.teal[400],
       ],
-      barWidth: 5,
+      barWidth: 3,
       isStrokeCapRound: true,
       dotData: FlDotData(
         show: false,

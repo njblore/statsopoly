@@ -21,7 +21,7 @@ final ThemeData AppThemeData = ThemeData(
       body1: TextStyle(
           fontFamily: 'JosefinSlab',
           fontWeight: FontWeight.normal,
-          fontSize: 15,
+          fontSize: 20,
           color: Colors.brown[900]),
       caption: TextStyle(
           fontFamily: 'JosefinSlab',

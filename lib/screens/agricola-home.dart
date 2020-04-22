@@ -4,6 +4,8 @@ import 'package:scoreboards_app/components/agricola-scores.dart';
 import 'package:scoreboards_app/components/agricola-wins.dart';
 import 'package:scoreboards_app/components/agricola-raw-data.dart';
 import 'package:scoreboards_app/components/agricola-roundup.dart';
+import 'package:scoreboards_app/models/agricola-background.dart';
+import 'package:scoreboards_app/models/loading-page.dart';
 
 class Agricola extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class _AgricolaState extends State<Agricola> {
   AgricolaData _agricolaData;
 
   void initialiseData() {
-    loadGame().then((data) => setState(() {
+    loadGames().then((data) => setState(() {
           _agricolaData = AgricolaData(data);
           _chartPages = [
             AgricolaRoundup(agricolaData: _agricolaData),
@@ -67,9 +69,8 @@ class _AgricolaState extends State<Agricola> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: isLoading
-              ? Text('Loading...')
-              : this._chartPages[this._currentIndex],
+          decoration: agricolaBackground,
+          child: isLoading ? loadingPage : this._chartPages[this._currentIndex],
         ),
       ),
     );

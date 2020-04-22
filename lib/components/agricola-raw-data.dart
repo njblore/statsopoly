@@ -1,15 +1,23 @@
 import 'dart:async' show Future;
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-Future<String> _loadAGameAsset() async {
-  return await rootBundle.loadString('assets/scores.json');
+Future<http.Response> _fetchGames() {
+  Map<String, String> requestHeaders = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+    'secret-key':
+        '\$2b\$10\$tVk/rIX8TJ15Zm5Oghjz1.0zwMVyQyzIUggpp/cngra1xISpd9N/q'
+  };
+  return http.get("https://api.jsonbin.io/b/5ea01b9b2940c704e1dc9684",
+      headers: requestHeaders);
 }
 
-Future loadGame() async {
-  String jsonString = await _loadAGameAsset();
-  final jsonResponse = json.decode(jsonString);
+Future loadGames() async {
+  http.Response res = await _fetchGames();
+  final jsonResponse = json.decode(res.body);
   AllGames gameScores = new AllGames.fromJson(jsonResponse);
+
   return gameScores;
 }
 
@@ -95,7 +103,7 @@ class AllGames {
   }
 
   factory AllGames.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['games'] as List;
+    var list = parsedJson['agricolaGames'] as List;
     List<GameScore> gameScores =
         list.map((game) => GameScore.fromJson(game)).toList();
     return AllGames(gameScores: gameScores);
