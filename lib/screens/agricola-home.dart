@@ -26,7 +26,7 @@ class _AgricolaState extends State<Agricola> {
           _chartPages = [
             AgricolaRoundup(agricolaData: _agricolaData),
             AgricolaWins(agricolaData: _agricolaData),
-            AgricolaScores(agricolaData: _agricolaData)
+            AgricolaScores(agricolaData: _agricolaData),
           ];
           isLoading = false;
         }));

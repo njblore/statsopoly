@@ -22,7 +22,6 @@ class AgricolaData {
     this.multiplayerData = allGames.gameScores
         .where((GameScore gameScore) => gameScore.playerScores.length > 2)
         .toList();
-
     List<ScoresRoundUp> scoreRoundups =
         this.getGameScoreRoundups(allGames.gameScores);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/screens/agricola-home.dart';
+import 'package:scoreboards_app/screens/agricola-score-input.dart';
 import 'package:scoreboards_app/screens/terraforming-home.dart';
 import 'package:scoreboards_app/theme/style.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => MyHomePage(),
         '/agricola': (context) => Agricola(),
         '/mars': (context) => Mars(),
+        '/agricola-score': (context) => AgricolaScoreInput(),
       },
       theme: AppThemeData,
     );
@@ -121,7 +123,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          bottom: 0,
+                          bottom: 10,
                           child: Container(
                             decoration: BoxDecoration(boxShadow: [
                               BoxShadow(
@@ -140,64 +142,87 @@ class MyHomePage extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Positioned(
+                          top: -20,
+                          right: -20,
+                          child: IconButton(
+                              color: Colors.pink[200],
+                              iconSize: 30,
+                              icon: (Icon(Icons.add_circle)),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, '/agricola-score')),
+                        )
                       ]),
                 ),
               ),
               Align(
                 alignment: Alignment(-0.7, 0),
                 child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/agricola');
-                    },
-                    child: Stack(
-                        overflow: Overflow.visible,
-                        alignment: Alignment.center,
-                        children: [
-                          Material(
-                            elevation: 0.0,
-                            shape: CircleBorder(),
-                            clipBehavior: Clip.antiAlias,
-                            child: Container(
-                              width: 120.0,
-                              height: 120.0,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage('assets/agricola.jpg'),
-                                    colorFilter: new ColorFilter.mode(
-                                        Colors.black.withOpacity(0.8),
-                                        BlendMode.dstATop),
-                                    fit: BoxFit.fitHeight,
-                                    alignment: Alignment.centerLeft),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100.0)),
-                                border: Border.all(
-                                  color: Colors.white70,
-                                  width: 2.0,
-                                ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/agricola');
+                  },
+                  child: Stack(
+                      overflow: Overflow.visible,
+                      alignment: Alignment.center,
+                      children: [
+                        Material(
+                          elevation: 0.0,
+                          shape: CircleBorder(),
+                          clipBehavior: Clip.antiAlias,
+                          child: Container(
+                            width: 120.0,
+                            height: 120.0,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/agricola.jpg'),
+                                  colorFilter: new ColorFilter.mode(
+                                      Colors.black.withOpacity(0.8),
+                                      BlendMode.dstATop),
+                                  fit: BoxFit.fitHeight,
+                                  alignment: Alignment.centerLeft),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(100.0)),
+                              border: Border.all(
+                                color: Colors.white70,
+                                width: 2.0,
                               ),
                             ),
                           ),
-                          Positioned(
-                            bottom: 5,
-                            child: Container(
-                              decoration: BoxDecoration(boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 20.0,
-                                  spreadRadius: 5.0,
-                                  offset: Offset(
-                                    0.0,
-                                    0.0,
-                                  ),
-                                )
-                              ]),
-                              child: Image(
-                                  image:
-                                      AssetImage('assets/agricolaheader.png'),
-                                  width: 150),
-                            ),
+                        ),
+                        Positioned(
+                          bottom: 5,
+                          child: Container(
+                            decoration: BoxDecoration(boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 20.0,
+                                spreadRadius: 5.0,
+                                offset: Offset(
+                                  0.0,
+                                  0.0,
+                                ),
+                              )
+                            ]),
+                            child: Image(
+                                image: AssetImage('assets/agricolaheader.png'),
+                                width: 150),
                           ),
-                        ])),
+                        ),
+                        Positioned(
+                          top: -25,
+                          right: -25,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: IconButton(
+                                color: Colors.white,
+                                iconSize: 50,
+                                icon: (Icon(Icons.add_circle)),
+                                onPressed: () => Navigator.pushNamed(
+                                    context, '/agricola-score')),
+                          ),
+                        ),
+                      ]),
+                ),
               ),
             ]),
       ),

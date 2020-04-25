@@ -1,6 +1,7 @@
 import 'dart:async' show Future;
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:scoreboards_app/helpers/dateFormat.dart';
 
 Future<http.Response> _fetchGames() {
   Map<String, String> requestHeaders = {
@@ -9,7 +10,7 @@ Future<http.Response> _fetchGames() {
     'secret-key':
         '\$2b\$10\$tVk/rIX8TJ15Zm5Oghjz1.0zwMVyQyzIUggpp/cngra1xISpd9N/q'
   };
-  return http.get("https://api.jsonbin.io/b/5ea01b9b2940c704e1dc9684",
+  return http.get("https://api.jsonbin.io/b/5ea01b9b2940c704e1dc9684/latest",
       headers: requestHeaders);
 }
 
@@ -25,6 +26,11 @@ class CategoryScore {
   String categoryName;
   int categoryPoints;
   CategoryScore({this.categoryName, this.categoryPoints});
+
+  Map<String, dynamic> toJson() => {
+        'category': categoryName.toLowerCase(),
+        'value': categoryPoints,
+      };
 
   @override
   toString() {
@@ -43,9 +49,14 @@ class PlayerScore {
   List<CategoryScore> categoryScores;
   PlayerScore({this.playerName, this.categoryScores});
 
+  Map<String, dynamic> toJson() => {
+        'name': playerName,
+        'scores': categoryScores,
+      };
+
   @override
   toString() {
-    return "{player : '$playerName'}";
+    return "{player : '$playerName', categoryScores: $categoryScores}";
   }
 
   factory PlayerScore.fromJson(Map<String, dynamic> parsedJson) {
@@ -63,9 +74,15 @@ class GameScore {
   String locationPlayed;
   GameScore({this.playerScores, this.locationPlayed, this.datePlayed});
 
+  Map<String, dynamic> toJson() => {
+        'players': playerScores,
+        'date': datePlayed == null ? "undefined" : formatDateString(datePlayed),
+        'location': locationPlayed
+      };
+
   @override
   toString() {
-    return "{playerscores: ['$playerScores'], date: '$datePlayed', location: '$locationPlayed' }";
+    return "{playerscores: '$playerScores', date: '$datePlayed', location: '$locationPlayed' }";
   }
 
   factory GameScore.fromJson(Map<String, dynamic> parsedJson) {
@@ -77,13 +94,7 @@ class GameScore {
     if (parsedJson['date'] == "unkown" || parsedJson['date'].length != 10) {
       datePlayed = null;
     } else {
-      var day = parsedJson['date'].substring(0, 2);
-      var month = parsedJson['date'].substring(3, 5);
-      var year = parsedJson['date'].substring(
-        6,
-      );
-      String formattedDate = "$year$month$day";
-      datePlayed = DateTime.parse(formattedDate);
+      datePlayed = formatDate(parsedJson["date"]);
     }
 
     return GameScore(
@@ -102,12 +113,26 @@ class AllGames {
     return "games: '$gameScores'";
   }
 
+  toJson() {
+    return {'agricolaGames': gameScores};
+  }
+
   factory AllGames.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['agricolaGames'] as List;
+    var list = parsedJson["agricolaGames"] as List;
     List<GameScore> gameScores =
         list.map((game) => GameScore.fromJson(game)).toList();
     return AllGames(gameScores: gameScores);
   }
+}
+
+class ScoreEntry {
+  String id;
+  GameScore score;
+  Map<String, dynamic> toJson() => {
+        id: score,
+      };
+
+  ScoreEntry(this.id, this.score);
 }
 
 class ScoresRoundUp {

@@ -65,13 +65,9 @@ class AgricolaRoundup extends StatelessWidget {
           decoration: agricolaBackground,
           height: MediaQuery.of(context).size.height,
           child: Container(
-            constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height -
-                    kBottomNavigationBarHeight),
             padding: EdgeInsets.only(
                 bottom: kBottomNavigationBarHeight, left: 15, right: 15),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text('Agricola',
@@ -162,19 +158,6 @@ class AgricolaRoundup extends StatelessWidget {
                           ]),
                     ),
                   ]),
-                ),
-                FlatButton(
-                  onPressed: (() => {null}),
-                  splashColor: Colors.lightBlue[100],
-                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    Padding(
-                      child: Icon(Icons.add_circle),
-                      padding: EdgeInsets.only(right: 10),
-                    ),
-                    Text("Add A Game Score",
-                        style: Theme.of(context).primaryTextTheme.subtitle),
-                  ]),
-                  color: Colors.lightGreen[200],
                 ),
               ],
             ),
