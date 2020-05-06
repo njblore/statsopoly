@@ -1,5 +1,6 @@
 import 'dart:async' show Future;
 import 'dart:convert';
+import 'package:date_format/date_format.dart';
 import 'package:http/http.dart' as http;
 import 'package:scoreboards_app/helpers/dateFormat.dart';
 
@@ -76,7 +77,9 @@ class GameScore {
 
   Map<String, dynamic> toJson() => {
         'players': playerScores,
-        'date': datePlayed == null ? "undefined" : formatDateString(datePlayed),
+        'date': datePlayed == null
+            ? "undefined"
+            : formatDate(datePlayed, [dd, '/', mm, '/', yyyy]),
         'location': locationPlayed
       };
 
@@ -94,7 +97,7 @@ class GameScore {
     if (parsedJson['date'] == "unkown" || parsedJson['date'].length != 10) {
       datePlayed = null;
     } else {
-      datePlayed = formatDate(parsedJson["date"]);
+      datePlayed = deserializeDatestring(parsedJson["date"]);
     }
 
     return GameScore(
