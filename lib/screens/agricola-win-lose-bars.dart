@@ -39,6 +39,11 @@ class _WinLoseBarsState extends State<WinLoseBars> {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
+        title: Text(
+          widget.title,
+          style: Theme.of(context).primaryTextTheme.title,
+        ),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -46,7 +51,7 @@ class _WinLoseBarsState extends State<WinLoseBars> {
             decoration: agricolaBackground,
           ),
           Container(
-            padding: EdgeInsets.only(bottom: kBottomNavigationBarHeight),
+            padding: EdgeInsets.symmetric(vertical: kBottomNavigationBarHeight),
             height: MediaQuery.of(context).size.height,
             color: Colors.transparent,
             child: Center(
@@ -55,10 +60,6 @@ class _WinLoseBarsState extends State<WinLoseBars> {
                 children: [
                   Column(
                     children: <Widget>[
-                      Text(
-                        widget.title,
-                        style: Theme.of(context).primaryTextTheme.title,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
@@ -95,7 +96,7 @@ class _WinLoseBarsState extends State<WinLoseBars> {
                       padding: EdgeInsets.only(right: 10, top: 10, bottom: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
-                        color: Colors.white54,
+                        color: Color.fromRGBO(251, 247, 245, 0.9),
                       ),
                       child: BarChart(
                         BarChartData(

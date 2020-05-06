@@ -49,6 +49,7 @@ class AgricolaRoundup extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           iconSize: 40,
           icon: Icon(
@@ -59,6 +60,8 @@ class AgricolaRoundup extends StatelessWidget {
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,
+        title: Text('Agricola',
+            style: Theme.of(context).primaryTextTheme.headline),
       ),
       body: Center(
         child: Container(
@@ -70,8 +73,6 @@ class AgricolaRoundup extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text('Agricola',
-                    style: Theme.of(context).primaryTextTheme.headline),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(

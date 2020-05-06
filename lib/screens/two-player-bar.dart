@@ -29,6 +29,11 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: Theme.of(context).primaryTextTheme.title,
+        ),
+        centerTitle: true,
         leading: IconButton(
           iconSize: 40,
           icon: Icon(
@@ -46,8 +51,8 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
             decoration: agricolaBackground,
           ),
           Container(
-            height:
-                MediaQuery.of(context).size.height - kBottomNavigationBarHeight,
+            padding: EdgeInsets.symmetric(vertical: kBottomNavigationBarHeight),
+            height: MediaQuery.of(context).size.height,
             color: Colors.transparent,
             child: Center(
               child: Column(
@@ -55,10 +60,6 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                 children: [
                   Column(
                     children: <Widget>[
-                      Text(
-                        widget.title,
-                        style: Theme.of(context).primaryTextTheme.title,
-                      ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.8,
                         padding: EdgeInsets.symmetric(vertical: 5),
@@ -114,7 +115,7 @@ class _TwoPlayerWinsBarState extends State<TwoPlayerWinsBar> {
                       padding: EdgeInsets.only(right: 10, top: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(3)),
-                        color: Colors.white38,
+                        color: Color.fromRGBO(255, 255, 247, 0.9),
                       ),
                       child: BarChart(
                         BarChartData(

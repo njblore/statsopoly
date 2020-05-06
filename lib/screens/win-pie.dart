@@ -33,6 +33,11 @@ class _WinPieCardState extends State<WinPieCard> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: Theme.of(context).primaryTextTheme.title,
+        ),
+        centerTitle: true,
         leading: IconButton(
           iconSize: 40,
           icon: Icon(
@@ -50,8 +55,8 @@ class _WinPieCardState extends State<WinPieCard> {
             decoration: agricolaBackground,
           ),
           Container(
-            height:
-                MediaQuery.of(context).size.height - kBottomNavigationBarHeight,
+            padding: EdgeInsets.symmetric(vertical: kBottomNavigationBarHeight),
+            height: MediaQuery.of(context).size.height,
             color: Colors.transparent,
             child: Center(
               child: Column(
@@ -59,10 +64,6 @@ class _WinPieCardState extends State<WinPieCard> {
                 children: [
                   Column(
                     children: <Widget>[
-                      Text(
-                        widget.title,
-                        style: Theme.of(context).primaryTextTheme.title,
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,

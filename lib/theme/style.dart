@@ -7,7 +7,7 @@ final ThemeData AppThemeData = ThemeData(
           fontFamily: 'AmaticSC',
           color: Colors.brown[800],
           fontWeight: FontWeight.bold,
-          fontSize: 80),
+          fontSize: 70),
       title: TextStyle(
           fontFamily: 'AmaticSC',
           color: Colors.brown[800],

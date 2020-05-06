@@ -23,6 +23,11 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: Theme.of(context).primaryTextTheme.title,
+        ),
+        centerTitle: true,
         leading: IconButton(
           iconSize: 40,
           icon: Icon(
@@ -40,22 +45,14 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
             decoration: agricolaBackground,
           ),
           Container(
-            height:
-                MediaQuery.of(context).size.height - kBottomNavigationBarHeight,
+            padding: EdgeInsets.symmetric(vertical: kBottomNavigationBarHeight),
+            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             color: Colors.transparent,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  children: <Widget>[
-                    Text(
-                      widget.title,
-                      style: Theme.of(context).primaryTextTheme.title,
-                    ),
-                  ],
-                ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
                       minHeight: MediaQuery.of(context).size.height * 0.5,
@@ -64,7 +61,7 @@ class _ScoresOverTimeBarChartState extends State<ScoresOverTimeBarChart> {
                     padding: EdgeInsets.only(right: 10, top: 10, bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(3)),
-                      color: Colors.white38,
+                      color: Color.fromRGBO(255, 255, 247, 0.9),
                     ),
                     child: LineChart(LineChartData(
                       titlesData: FlTitlesData(
