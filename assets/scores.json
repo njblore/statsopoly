@@ -3277,45 +3277,6 @@
       ],
       "date": "30/11/2019",
       "location": "UK"
-    },
-    {
-      "players": [
-        {
-          "name": "tash",
-          "scores": [
-            { "category": "Fields", "value": 4 },
-            { "category": "Pastures", "value": 4 },
-            { "category": "Grain", "value": 4 },
-            { "category": "Vegetables", "value": 4 },
-            { "category": "Sheep", "value": 4 },
-            { "category": "Wild Boar", "value": 4 },
-            { "category": "Cattle", "value": 4 },
-            { "category": "Fenced Stables", "value": 4 },
-            { "category": "Clay Rooms", "value": 4 },
-            { "category": "Stone Rooms", "value": 4 },
-            { "category": "Unused Spaces", "value": 4 },
-            { "category": "Family Members", "value": 4 },
-            { "category": "Points for Cards", "value": 4 },
-            { "category": "Bonus Points", "value": 4 },
-            { "category": "Fields", "value": 4 },
-            { "category": "Pastures", "value": 4 },
-            { "category": "Grain", "value": 4 },
-            {
-              "category": "Vegetables",
-              "value": 4
-            },
-            { "category": "Sheep", "value": 4 },
-            { "category": "Wild Boar", "value": 4 },
-            { "category": "Cattle", "value": 4 },
-            { "category": "Fenced Stables", "value": 4 },
-            { "category": "Clay Rooms", "value": 4 },
-            { "category": "Stone Rooms", "value": 4 },
-            { "category": "Unused Spaces", "value": 4 },
-            { "category": "Family Members", "value": 4 },
-            { "category": "Points for Cards", "value": 4 }
-          ]
-        }
-      ]
     }
   ]
 }
