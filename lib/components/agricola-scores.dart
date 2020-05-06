@@ -18,7 +18,6 @@ class _AgricolaScoresState extends State<AgricolaScores> {
     var twoPlayerGamesWithKnownDate = widget.agricolaData.twoPlayerData
         .where((game) => game.datePlayed != null)
         .toList();
-
     var winningAndlosingScoresByCategories =
         widget.agricolaData.twoPlayerRoundups;
 

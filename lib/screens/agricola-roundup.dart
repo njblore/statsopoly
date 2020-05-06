@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:scoreboards_app/components/agricola-data.dart';
 import 'package:scoreboards_app/components/agricola-background.dart';
@@ -40,11 +42,29 @@ class AgricolaRoundup extends StatelessWidget {
         fontSize: 30,
         fontWeight: FontWeight.bold,
         fontFamily: "AmaticSC",
-        color: Colors.white,
-        shadows: [Shadow(color: Colors.black, blurRadius: 35)]);
+        color: Colors.orange,
+        shadows: [
+          Shadow(color: Colors.black, blurRadius: 2, offset: Offset(0.5, 0.5))
+        ]);
 
-    TextStyle infoText = Theme.of(context).primaryTextTheme.body1.merge(
-        TextStyle(shadows: [Shadow(color: Colors.white, blurRadius: 35)]));
+    TextStyle infoText2 = Theme.of(context).primaryTextTheme.body1.merge(
+          TextStyle(color: Colors.white, shadows: [
+            Shadow(color: Colors.black, blurRadius: 3, offset: Offset(0.5, 0.5))
+          ]),
+        );
+
+    TextStyle infoText1 = Theme.of(context).primaryTextTheme.body1.merge(
+          TextStyle(color: Colors.black, shadows: [
+            Shadow(color: Colors.white, blurRadius: 3, offset: Offset(0.5, 0.5))
+          ]),
+        );
+
+    Divider factDivider = Divider(
+      color: Colors.brown[800].withOpacity(0.8),
+      thickness: 0.8,
+      indent: 15,
+      endIndent: 15,
+    );
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -69,98 +89,94 @@ class AgricolaRoundup extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: Container(
             padding: EdgeInsets.only(
-                bottom: kBottomNavigationBarHeight, left: 15, right: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(132, 189, 179, 0.7),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Column(children: [
-                    RichText(
-                      text: TextSpan(
-                          style: infoText,
-                          text: "Number of games recorded: ",
-                          children: [
-                            TextSpan(style: statsText, text: "$numOfGames")
-                          ]),
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                          text: "Of those, ",
-                          style: infoText,
-                          children: [
-                            TextSpan(
-                                text: "$numOfTwoPlayerGames", style: statsText),
-                            TextSpan(text: " were two player and "),
-                            TextSpan(
-                                text: "$nonTwoPlayerGames", style: statsText),
-                            TextSpan(text: " were multiplayer games")
-                          ]),
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                          text: "The highest score across all games was ",
-                          style: infoText,
-                          children: [
-                            TextSpan(text: "$highestScore", style: statsText),
-                            TextSpan(text: ", scored by "),
-                            TextSpan(
-                                text: "$highestScoringPlayer",
-                                style: statsText),
-                            TextSpan(text: "!")
-                          ]),
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                          text: "And the lowest score across all games was ",
-                          style: infoText,
-                          children: [
-                            TextSpan(text: "$lowestScore", style: statsText),
-                            TextSpan(text: ", scored by "),
-                            TextSpan(
-                                text: "$lowestScoringPlayer", style: statsText),
-                            TextSpan(text: "!")
-                          ]),
-                    ),
-                    Divider(
-                      color: Colors.white,
-                      indent: 15,
-                      endIndent: 15,
-                    ),
-                    RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                          text:
-                              "The average score across all games is a respectable ",
-                          style: infoText,
-                          children: [
-                            TextSpan(text: "$overallAverage", style: statsText),
-                          ]),
-                    ),
-                  ]),
-                ),
-              ],
+                bottom: kBottomNavigationBarHeight + 10,
+                left: 20,
+                right: 20,
+                top: 100),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                // decoration: BoxDecoration(
+                //   gradient: LinearGradient(
+                //       end: Alignment.bottomCenter,
+                //       begin: Alignment.topCenter,
+                //       colors: [
+                //         Color.fromRGBO(250, 255, 255, 0.3),
+                //         Color.fromRGBO(250, 255, 255, 0.5)
+                //       ]),
+                // ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            style: infoText1,
+                            text: "Number of games recorded: ",
+                            children: [
+                              TextSpan(style: statsText, text: "$numOfGames")
+                            ]),
+                      ),
+                      factDivider,
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            text: "Of those, ",
+                            style: infoText1,
+                            children: [
+                              TextSpan(
+                                  text: "$numOfTwoPlayerGames",
+                                  style: statsText),
+                              TextSpan(text: " were two player and "),
+                              TextSpan(
+                                  text: "$nonTwoPlayerGames", style: statsText),
+                              TextSpan(text: " were multiplayer games")
+                            ]),
+                      ),
+                      factDivider,
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            text: "The highest score across all games was ",
+                            style: infoText2,
+                            children: [
+                              TextSpan(text: "$highestScore", style: statsText),
+                              TextSpan(text: ", scored by "),
+                              TextSpan(
+                                  text: "$highestScoringPlayer",
+                                  style: statsText),
+                              TextSpan(text: "!")
+                            ]),
+                      ),
+                      factDivider,
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            text: "And the lowest score across all games was ",
+                            style: infoText2,
+                            children: [
+                              TextSpan(text: "$lowestScore", style: statsText),
+                              TextSpan(text: ", scored by "),
+                              TextSpan(
+                                  text: "$lowestScoringPlayer",
+                                  style: statsText),
+                              TextSpan(text: "!")
+                            ]),
+                      ),
+                      factDivider,
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            text:
+                                "The average score across all games is a respectable ",
+                            style: infoText2,
+                            children: [
+                              TextSpan(
+                                  text: "$overallAverage", style: statsText),
+                            ]),
+                      ),
+                    ]),
+              ),
             ),
           ),
         ),
